@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">EasyEchoDemo</string>
+
+    <string name="data_str">{
+    "name": "小明",
+    "age": 15,
+    "sex": "男",
+    "home": "北京",
+    "hobby": "看电影",
+    "extra": "其他",
+    "grades": {
+        "chinese": 95,
+        "math": 100,
+        "english": 90,
+        "level": "优秀"
+    }
+}</string>
+</resources>
