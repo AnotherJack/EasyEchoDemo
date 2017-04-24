@@ -12,7 +12,6 @@ import java.util.Set;
 
 
 public class EasyEcho {
-    /*Map相关 ---------- Start*/
     public static void echoMap(Map map, View parent, IdStrConverterForMap idStrConverter) {
         //遍历map
         Set<Map.Entry> entries = map.entrySet();
@@ -133,10 +132,8 @@ public class EasyEcho {
             }
         });
     }
-/*Map相关 ---------- End*/
 
 
-    /*Bean相关 ---------- Start*/
     public static void echoBean(Object obj, View parent, IdStrConverterForBean idStrConverter) {
         //获取bean的运行时类
         Class clazz = obj.getClass();
@@ -287,8 +284,8 @@ public class EasyEcho {
         });
     }
 
-/*Bean相关 ---------- End*/
 
+    
     //通过反射获取int型的id
     private static int getIntegerId(String idStr) {
         int integerId = 0;
