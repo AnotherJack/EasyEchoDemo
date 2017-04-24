@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.github.anotherjack.easyechodemo.easyEcho.EasyEcho;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class SaveAsMapActivity extends AppCompatActivity {
                 defaultMap.put("sex","");
                 defaultMap.put("home","");
                 defaultMap.put("hobby","");
-                defaultMap.put("extra","");
+                defaultMap.put("extra","其他");
 
                 Map gradesMap = new HashMap();
                 gradesMap.put("chinese",0);
@@ -43,6 +44,19 @@ public class SaveAsMapActivity extends AppCompatActivity {
                 gradesMap.put("level","及格");
 
                 defaultMap.put("grades",gradesMap);
+
+                ArrayList<Map> friendsList = new ArrayList<>();
+                Map friendMap1 = new HashMap();
+                friendMap1.put("friendName","");
+                Map friendMap2 = new HashMap();
+                friendMap2.put("friendName","");
+                Map friendMap3 = new HashMap();
+                friendMap3.put("friendName","");
+                friendsList.add(friendMap1);
+                friendsList.add(friendMap2);
+                friendsList.add(friendMap3);
+
+                defaultMap.put("friends",friendsList);
 
                 //注意，调用EasyEcho.saveAsMap之后，传进去的defaultMap也会改变，这是Java地址传递的问题，考虑过深度复制一份map，但是查了资料后就HashMap好弄一点，所以目前没弄
                 Map resultMap = EasyEcho.saveAsMap(defaultMap,SaveAsMapActivity.this);

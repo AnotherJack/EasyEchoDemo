@@ -21,7 +21,16 @@ public class EchoBeanActivity extends AppCompatActivity {
         data_str = getString(R.string.data_str);
         Student student = gson.fromJson(data_str,Student.class);
 
-        EasyEcho.echoBean(student, this);
+        EasyEcho.echoBean(student, this, new EasyEcho.IdStrConverterForBean() {
+            @Override
+            public String convert(String fieldName, Class<?> clazz) {
+                if(clazz.equals(Student.GradesBean.class)){
+                    return "grades_"+fieldName;
+                }else {
+                    return fieldName;
+                }
+            }
+        });
     }
 
 

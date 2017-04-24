@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.github.anotherjack.easyechodemo.easyEcho.EasyEcho;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +19,6 @@ public class EchoMapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_echo_map);
-        String data_str = getString(R.string.data_str);
 
 
         Map studentMap = new HashMap();
@@ -33,9 +33,22 @@ public class EchoMapActivity extends AppCompatActivity {
         gradesMap.put("chinese",95);
         gradesMap.put("math",100);
         gradesMap.put("english",90);
-        gradesMap.put("level","优秀");
+        gradesMap.put("level", "优秀");
 
-        studentMap.put("grades",gradesMap);
+        studentMap.put("grades", gradesMap);
+
+        ArrayList<Map> friendsList = new ArrayList<>();
+        Map friendMap1 = new HashMap();
+        friendMap1.put("friendName","小红");
+        Map friendMap2 = new HashMap();
+        friendMap2.put("friendName","小刚");
+        Map friendMap3 = new HashMap();
+        friendMap3.put("friendName","小军");
+        friendsList.add(friendMap1);
+        friendsList.add(friendMap2);
+        friendsList.add(friendMap3);
+
+        studentMap.put("friends",friendsList);
 
         EasyEcho.echoMap(studentMap, this);
     }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.github.anotherjack.easyechodemo.R;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,8 +21,14 @@ public class EasyEcho {
             String key = entry.getKey().toString();
             //获取到值（Object）
             Object valueObj = entry.getValue();
+            //获取值的类型
+            Class valueClass = valueObj.getClass();
+            //如果是Collection（即Set、List），不予回显，直接continue
+            if(Collection.class.isAssignableFrom(valueClass)){
+                continue;
+            }
             //如果值的类型是map，递归
-            if (Map.class.isAssignableFrom(valueObj.getClass())) {
+            if (Map.class.isAssignableFrom(valueClass)) {
                 echoMap((Map) valueObj, parent, idStrConverter);
                 continue;
             }
@@ -76,6 +83,11 @@ public class EasyEcho {
             Object valueObj = entry.getValue();
             //获取值的类型
             Class valueClass = valueObj.getClass();
+            //如果是Collection（即Set、List），不予赋值，直接continue
+            if(Collection.class.isAssignableFrom(valueClass)){
+                continue;
+            }
+
             //如果值的类型是map，递归获取valueMap，并赋值给entry，记得要continue
             if (Map.class.isAssignableFrom(valueClass)) {
                 Map valueMap = saveAsMap((Map) valueObj, parent, idStrConverter);
@@ -93,11 +105,15 @@ public class EasyEcho {
             int integerId = getIntegerId(idStr);
             //获取控件
             TextView tv = (TextView) parent.findViewById(integerId);
-            //获取textview里的字符串
-            String tvStr = "";
-            if (tv != null) {
-                tvStr = tv.getText().toString();
+            //如果控件为null，直接continue，不赋值
+            if(tv==null){
+                continue;
             }
+
+            //否则执行下面代码
+
+            //获取textview里的字符串
+            String tvStr = tv.getText().toString();
 
             //最终要赋给entry的value Object
             Object finalValueObj = str2Obj(tvStr, valueClass);
@@ -152,9 +168,15 @@ public class EasyEcho {
                 e.printStackTrace();
             }
 
-            //如果值的类型不是基本类型，不是基本类型的封装类，也不是字符串类型，即是Bean，递归
-            Class fieldValueClass = fieldValueObj.getClass();
-            if (!fieldValueClass.isPrimitive() && !isWrapClass(fieldValueClass) && !String.class.isAssignableFrom(fieldValueClass)) {
+            Class fieldClass = field.getType();
+
+            //首先判断，如果类型是集合类(Collection或Map)，直接continue，不回显
+            if(Collection.class.isAssignableFrom(fieldClass) || Map.class.isAssignableFrom(fieldClass)){
+                continue;
+            }
+
+            //其次，如果类型不是基本类型，不是基本类型的封装类，也不是字符串类型，即是Bean，递归
+            if (!fieldClass.isPrimitive() && !isWrapClass(fieldClass) && !String.class.isAssignableFrom(fieldClass)) {
                 echoBean(fieldValueObj, parent, idStrConverter);
                 continue;
             }
@@ -218,7 +240,11 @@ public class EasyEcho {
             String fieldName = field.getName();
             //获取field的类型
             Class<?> fieldClass = field.getType();
-            //如果不是基本类型，不是基本类型的封装类，也不是String类型，则认为是Bean，递归，并赋值，记得continue
+            //首先判断，如果类型是集合类(Collection或Map)，直接continue，不存数据
+            if(Collection.class.isAssignableFrom(fieldClass) || Map.class.isAssignableFrom(fieldClass)){
+                continue;
+            }
+            //其次，如果不是基本类型，不是基本类型的封装类，也不是String类型，则认为是Bean，递归，并赋值，记得continue
             if (!fieldClass.isPrimitive() && !isWrapClass(fieldClass) && !String.class.isAssignableFrom(fieldClass)) {
                 Object fieldValueObj = saveAsBean(fieldClass, parent, idStrConverter);
                 try {
@@ -237,15 +263,18 @@ public class EasyEcho {
             //根据id字符串，通过反射获取int型id
             int integerId = getIntegerId(idStr);
 
-            //拿到控件，获取的text就是对应bean的值（value）
+            //拿到控件
             TextView tv = (TextView) parent.findViewById(integerId);
-            String tvStr = "";
-            if (tv != null) {
-                tvStr = tv.getText().toString();
+            //如果tv是null，直接continue，不赋值
+            if(tv==null){
+                continue;
             }
 
+            //否则，执行下面代码
+            //获取textview里的字符串
+            String tvStr = tv.getText().toString();
+            //字符串转为相应类型的Object
             Object fieldValueObj = str2Obj(tvStr, fieldClass);
-
 
             //给result相应属性赋值
             if (fieldValueObj != null) {
@@ -300,7 +329,7 @@ public class EasyEcho {
         return integerId;
     }
 
-    //把字符串转成相应的运行时类型（基本类型或字符串，不会转Bean的）
+    //把字符串转成相应的运行时类型（只转基本类型或字符串，不会转Bean的），无法转过去的会返回null
     private static Object str2Obj(String str, Class clazz) {
         Object resultObj = null;
         try {

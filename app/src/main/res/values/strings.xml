@@ -13,6 +13,17 @@
         "math": 100,
         "english": 90,
         "level": "优秀"
-    }
+    },
+    "friends": [
+        {
+            "friendName": "小红"
+        },
+        {
+            "friendName": "小刚"
+        },
+        {
+            "friendName": "小军"
+        }
+    ]
 }</string>
 </resources>

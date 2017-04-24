@@ -27,7 +27,16 @@ public class SaveAsBeanActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Student student = EasyEcho.saveAsBean(Student.class,SaveAsBeanActivity.this);
+                Student student = EasyEcho.saveAsBean(Student.class, SaveAsBeanActivity.this, new EasyEcho.IdStrConverterForBean() {
+                    @Override
+                    public String convert(String fieldName, Class<?> clazz) {
+                        if(clazz.equals(Student.GradesBean.class)){
+                            return "grades_"+fieldName;
+                        }else {
+                            return fieldName;
+                        }
+                    }
+                });
                 result.setText(gson.toJson(student));
             }
         });

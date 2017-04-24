@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/chinese"
+            android:id="@+id/grades_chinese"
             android:textSize="18sp"
             android:textColor="#ff0000"
             android:layout_width="0dp"
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/math"
+            android:id="@+id/grades_math"
             android:textSize="18sp"
             android:textColor="#ff0000"
             android:layout_width="0dp"
@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/english"
+            android:id="@+id/grades_english"
             android:textSize="18sp"
             android:textColor="#ff0000"
             android:layout_width="0dp"
@@ -185,12 +185,40 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/level"
+            android:id="@+id/grades_level"
             android:textSize="18sp"
             android:textColor="#ff0000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
+    </LinearLayout>
+    <TextView
+        android:text="朋友们"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+        <TextView
+            android:text="朋友姓名"
+            android:textSize="18sp"
+            android:gravity="end"
+            android:textColor="#000000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/friendName"
+            android:textSize="18sp"
+            android:textColor="#ff0000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"/>
     </LinearLayout>
     <Button
         android:id="@+id/save"
@@ -205,7 +233,7 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="3"/>
+        android:maxLines="10"/>
 
 </LinearLayout>
 </ScrollView>

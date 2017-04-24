@@ -1,7 +1,9 @@
 package com.github.anotherjack.easyechodemo.bean;
 
+import java.util.List;
+
 /**
- * Created by zhengj on 2017/4/24.
+ * Created by ASD on 2017/4/24.
  */
 public class Student {
     /**
@@ -12,15 +14,17 @@ public class Student {
      * hobby : 看电影
      * extra : 其他
      * grades : {"chinese":95,"math":100,"english":90,"level":"优秀"}
+     * friends : [{"friendName":"小红"},{"friendName":"小刚"},{"friendName":"小军"}]
      */
 
     private String name;
-    private int age;
+    private int age = 24;
     private String sex;
     private String home;
     private String hobby;
-    private String extra;
-    private Grades grades;
+    private String extra = "其他";
+    private GradesBean grades;
+    private List<FriendsBean> friends;
 
     public String getName() {
         return name;
@@ -70,15 +74,23 @@ public class Student {
         this.extra = extra;
     }
 
-    public Grades getGrades() {
+    public GradesBean getGrades() {
         return grades;
     }
 
-    public void setGrades(Grades grades) {
+    public void setGrades(GradesBean grades) {
         this.grades = grades;
     }
 
-    public static class Grades {
+    public List<FriendsBean> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<FriendsBean> friends) {
+        this.friends = friends;
+    }
+
+    public static class GradesBean {
         /**
          * chinese : 95
          * math : 100
@@ -86,10 +98,10 @@ public class Student {
          * level : 优秀
          */
 
-        private int chinese;
+        private int chinese = 100;
         private int math;
         private int english;
-        private String level;
+        private String level = null;
 
         public int getChinese() {
             return chinese;
@@ -121,6 +133,22 @@ public class Student {
 
         public void setLevel(String level) {
             this.level = level;
+        }
+    }
+
+    public static class FriendsBean {
+        /**
+         * friendName : 小红
+         */
+
+        private String friendName;
+
+        public String getFriendName() {
+            return friendName;
+        }
+
+        public void setFriendName(String friendName) {
+            this.friendName = friendName;
         }
     }
 }
