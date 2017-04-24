@@ -285,7 +285,7 @@ public class EasyEcho {
     }
 
 
-    
+
     //通过反射获取int型的id
     private static int getIntegerId(String idStr) {
         int integerId = 0;
