@@ -21,6 +21,10 @@ public class EasyEcho {
             String key = entry.getKey().toString();
             //获取到值（Object）
             Object valueObj = entry.getValue();
+            //先判断值是不是null，是null的话直接continue，不回显，否则下面valueObj.getClass()会报空指针
+            if(valueObj==null){
+                continue;
+            }
             //获取值的类型
             Class valueClass = valueObj.getClass();
             //如果是Collection（即Set、List），不予回显，直接continue
@@ -81,8 +85,13 @@ public class EasyEcho {
             String key = entry.getKey().toString();
             //获取到值（Object）
             Object valueObj = entry.getValue();
-            //获取值的类型
-            Class valueClass = valueObj.getClass();
+            //获取值的类型，需要进行null判断，否则valueObj.getClass()会报空指针。如果valueObj为null，把类型当字符串处理，否则getClass获取类型
+            Class valueClass;
+            if(valueObj==null){
+                valueClass = String.class;
+            }else {
+                valueClass = valueObj.getClass();
+            }
             //如果是Collection（即Set、List），不予赋值，直接continue
             if(Collection.class.isAssignableFrom(valueClass)){
                 continue;
@@ -117,6 +126,7 @@ public class EasyEcho {
 
             //最终要赋给entry的value Object
             Object finalValueObj = str2Obj(tvStr, valueClass);
+            //finalValueObj为null的话也不赋值
             if(finalValueObj!=null){
                 entry.setValue(finalValueObj);
             }
@@ -167,6 +177,10 @@ public class EasyEcho {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+            //判断，如果是null，直接continue，不回显
+            if(fieldValueObj == null){
+                continue;
+            }
 
             Class fieldClass = field.getType();
 
@@ -182,7 +196,7 @@ public class EasyEcho {
             }
 
             //否则（是基本类型或字符串的话），直接回显toString
-            String fieldValue = fieldValueObj.toString();
+            String fieldValueStr = fieldValueObj.toString();
 
             //根据属性名称获取到对应的id字符串
             String idStr = idStrConverter.convert(fieldName, clazz);
@@ -193,7 +207,7 @@ public class EasyEcho {
             //最后控件赋值，大功告成
             TextView tv = (TextView) parent.findViewById(integerId);
             if (tv != null) {
-                tv.setText(fieldValue);
+                tv.setText(fieldValueStr);
             }
 
         }

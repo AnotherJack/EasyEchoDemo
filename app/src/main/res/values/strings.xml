@@ -2,7 +2,7 @@
     <string name="app_name">EasyEchoDemo</string>
 
     <string name="data_str">{
-    "name": "小明",
+    "name": null,
     "age": 15,
     "sex": "男",
     "home": "北京",

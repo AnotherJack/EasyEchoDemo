@@ -30,7 +30,7 @@ public class SaveAsMapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //创建一个模板map，也就是默认map，可以存储一个json字符串，每次用到的时候解析为map来用
                 Map defaultMap = new HashMap();
-                defaultMap.put("name","");
+                defaultMap.put("name",null);
                 defaultMap.put("age",0);
                 defaultMap.put("sex","");
                 defaultMap.put("home","");

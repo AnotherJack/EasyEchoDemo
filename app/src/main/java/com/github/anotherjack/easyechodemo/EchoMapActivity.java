@@ -22,7 +22,7 @@ public class EchoMapActivity extends AppCompatActivity {
 
 
         Map studentMap = new HashMap();
-        studentMap.put("name","小明");
+        studentMap.put("name",null);
         studentMap.put("age",15);
         studentMap.put("sex","男");
         studentMap.put("home","北京");
