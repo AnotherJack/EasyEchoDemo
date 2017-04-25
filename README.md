@@ -39,7 +39,7 @@ EasyEcho 轻松实现页面数据回显和保存，让你从无尽的setText和g
 1. Map map:要显示到页面上的数据
 2. View parent:数据要显示的父布局，即决定了在哪个view上findViewById。
 3. IdStrConverterForMap idStrConverter:接口，需要实现convert方法，用于把map数据字段根据你自己的命名规则转为id字符串
-### （二）public static void saveAsMap(Map defaultMap, View parent, IdStrConverterForMap idStrConverter)
+### （二）public static Map saveAsMap(Map defaultMap, View parent, IdStrConverterForMap idStrConverter)
 #### 作用
 根据一个默认map（模板map）把页面数据保存成map型
 #### 返回值 Map
