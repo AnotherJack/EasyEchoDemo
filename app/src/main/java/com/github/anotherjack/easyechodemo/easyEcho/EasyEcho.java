@@ -45,7 +45,14 @@ public class EasyEcho {
             int integerId = getIntegerId(idStr);
 
             //最后控件赋值，大功告成
-            TextView tv = (TextView) parent.findViewById(integerId);
+            TextView tv;
+            try {
+                tv = (TextView) parent.findViewById(integerId);
+            }catch (ClassCastException e){
+                //转不成TextView，直接continue跳过
+                e.printStackTrace();
+                continue;
+            }
             if (tv != null) {
                 tv.setText(value);
             }
@@ -113,7 +120,15 @@ public class EasyEcho {
             //根据id字符串，通过反射获取int型id
             int integerId = getIntegerId(idStr);
             //获取控件
-            TextView tv = (TextView) parent.findViewById(integerId);
+            TextView tv;
+            try {
+                tv = (TextView) parent.findViewById(integerId);
+            }catch (ClassCastException e){
+                //转不成TextView，直接continue跳过
+                e.printStackTrace();
+                continue;
+            }
+
             //如果控件为null，直接continue，不赋值
             if(tv==null){
                 continue;
@@ -205,7 +220,14 @@ public class EasyEcho {
             int integerId = getIntegerId(idStr);
 
             //最后控件赋值，大功告成
-            TextView tv = (TextView) parent.findViewById(integerId);
+            TextView tv;
+            try {
+                tv = (TextView) parent.findViewById(integerId);
+            }catch (ClassCastException e){
+                //转不成TextView，直接continue跳过
+                e.printStackTrace();
+                continue;
+            }
             if (tv != null) {
                 tv.setText(fieldValueStr);
             }
@@ -278,7 +300,14 @@ public class EasyEcho {
             int integerId = getIntegerId(idStr);
 
             //拿到控件
-            TextView tv = (TextView) parent.findViewById(integerId);
+            TextView tv;
+            try {
+                tv = (TextView) parent.findViewById(integerId);
+            }catch (ClassCastException e){
+                //转不成TextView，直接continue跳过
+                e.printStackTrace();
+                continue;
+            }
             //如果tv是null，直接continue，不赋值
             if(tv==null){
                 continue;
