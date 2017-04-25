@@ -55,12 +55,12 @@ EasyEcho 轻松实现页面数据回显和保存，让你从无尽的setText和g
 1. Object obj:要回显的数据，Java Bean实例
 2. View parent:数据要显示的父布局
 3. IdStrConverterForBean idStrConverter:id字符串转换器，注意这个是ForBean的，convert方法的第二个参数和ForMap的有所不同
-### （四）public static <T> T saveAsBean(Class<T> clazz, View parent, IdStrConverterForBean idStrConverter)
+### （四）public static \<T> T saveAsBean(Class\<T> clazz, View parent, IdStrConverterForBean idStrConverter)
 #### 作用
 把页面数据保存成相应Bean类型
 #### 返回值 即为第一个参数传的Class类型的实例
 #### 参数介绍
-1. Class<T> clazz:Java Bean类，要把页面数据保存成什么类型的实体类
+1. Class\<T> clazz:Java Bean类，要把页面数据保存成什么类型的实体类
 2. View parent:要保存哪个父布局下的数据
 3. IdStrConverterForBean idStrConverter:id字符串转换器
 ### 其他重载方法
